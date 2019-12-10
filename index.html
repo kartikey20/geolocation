@@ -11,17 +11,22 @@
   </head>
   <body>
     <h1>Hello lets trace your location</h1>
-    <button onclick="getLocation()"></button>
+    <button onclick="getLocation()">Get your location</button>
     <div id="output"></div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
       let x = document.getElementById("output");
       function getLocation() {
         if (navigator.geolocation) {
-          x.innerHTML = "Supporting";
+          navigator.geolocation.getCurrentPosition(showPosition);
         } else {
           x.innerHTML = "your browser don't support html 5";
         }
+      }
+      function showPosition(position) {
+        x.innerHTML = `latitude is ${position.coords.latitude}`;
+        x.innerHTML += "<br />";
+        x.innerHTML += `longitude is ${position.coords.longitude}`;
       }
     </script>
   </body>
